@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}User {{ user.nom }}{% endblock %}
+{% block body %}
+    <div class="container">
+        <br>
+        <div class="card mb-3">
+            <h3 class="card-header">Affichage</h3>
+            <div class="card-body">
+                <h5 class="card-title">Les information sur l'utilisateur  {{ user.nom }} :</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong><span class="text-primary">Nom :</span></strong> {{ user.nom }}</li>
+                <p class="list-group-item"><strong><span class="text-primary">Prénom :</span></strong> {{ user.prenom }}</li>
+                <li class="list-group-item"><strong><span class="text-primary">Ajouter le :</span></strong> {{ user.createdAt | date('d/m/Y') }} {{ user.createdAt | date('H:i') }}</li>
+            </ul>
+            {% if app.user %}
+            <div class="card-body">
+                <a href="{{ path('edit_user' , {'id': user.getId}) }}" class="card-link"><button type="button" class="btn btn-primary">Editer</button></a>
+                <a href="{{ path('delete_user' , {'id': user.getId}) }}" class="card-link"><button type="button" class="btn btn-danger">Supprimer</button></a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

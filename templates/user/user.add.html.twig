@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+
+
+
+
+{% block body %}
+    <div class="container">
+        <br>
+        {% if app.user %}
+            {% if not editMode %}
+            <h1>Ajout d'un nouveau utilisateur :</h1>
+        {% else %}
+            <h1>Modification d'un utilisateur :</h1>
+        {% endif %}
+            <br>
+            {{ form_start(form) }}
+            {{ form_row(form.nom, {'attr': {'placeholder' : "Le nom de l\utilsateur ..."}}) }}
+            {{ form_row(form.prenom, {'attr': {'placeholder' : "Le prénom de l\utilsateur ..."}}) }}
+                <button type="submit" class="btn btn-success">
+                    {% if editMode %}
+                        Mofidier !
+                    {% else %}
+                        Ajouter !
+                    {% endif %}
+
+                </button>
+            {{ form_end(form) }}
+
+        {% else %}
+            <br>
+            <a href="{{ path('users') }}" >
+                &#9995; Revenir à la liste des utilsateur
+            </a>
+
+        {% endif %}
+    </div>
+{% endblock %}

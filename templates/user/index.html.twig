@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Bienvenue !</h1>
+    <br>
+
+    {% if app.user %}
+        <div>
+            <a href="{{ path('add_user') }}" class="card-link">
+                <button type="button" class="btn btn-primary">Ajouter un utilisateur</button>
+            </a>
+        </div>
+    {% endif %}
+    <br>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Created at</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+        <tr class="table-active">
+            <th scope="row">{{ user.id }}</th>
+            <td>{{ user.nom }}</td>
+            <td>{{ user.prenom }}</td>
+            <td>{{ user.createdAt | date('d/m/Y') }} {{ user.createdAt | date('H:i') }}</td>
+            <td><a href="{{ path('show_user' , {'id' : user.id}) }}"><span class="badge badge-pill badge-primary">Afficher</span></a></td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}
